@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SINU Command Center - Extreme 4-Zone Web3 Engine</title>
     
+    <!-- أدوات التطوير والمكتبات الخارجية -->
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
 
@@ -18,51 +19,37 @@
 </head>
 <body>
 
+    <!-- حاوية الأنيميشن والهدايا الحية -->
     <div class="live-screen-overlay-container" id="globalLiveScreenOverlay"></div>
 
+    <!-- الستار الخلفي لبوابة الدخول (تم تصحيح تداخلات الأوسمة هنا) -->
     <div class="auth-backdrop" id="coreAuthBackdrop">
-        <div class="auth-panel-card">
-          </head>
-<body>
-</head>
-<body>
-
-    <!-- 1. حاوية الأوفرلاي العالمية - مغلقة تماماً ولا تحجب الشاشة -->
-    <div class="live-screen-overlay-container" id="globalLiveScreenOverlay" style="display: none;"></div>
-
-    <!-- 2. الستار الخلفي الشفاف الشامل لشاشة الدخول -->
-    <div class="auth-backdrop" id="coreAuthBackdrop">
-        
-        <!-- 3. كارت بوابة الدخول الرئيسي (مغلق ومحمي من التداخل) -->
         <div class="auth-panel-card">
             
-            <!-- الهيدر الرسمي الجديد والنظيف بعد مسح التكرار القديم -->
-            <div style="text-align: center; margin-bottom: 25px;">
-                <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 12px;">
-                    <!-- استدعاء اللوغو المعتمد للموقع -->
+            <!-- الهيدر الاحترافي مع اللوغو الرسمي الخاص بك -->
+            <div style="text-align: center; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px;">
                     <img src="1781612384197.png" alt="SINU Site Logo" style="width: 55px; height: 55px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(255, 101, 132, 0.4); border: 1px solid rgba(255, 101, 132, 0.2);">
-                    <h2 style="color: var(--dating-pink); font-size: 2.3rem; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; margin: 0;">
+                    <h2 style="color: var(--dating-pink); font-size: 2.3rem; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px;">
                         SINU <span style="color: var(--danger);">❤️</span>
                     </h2>
                 </div>
-                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin: 0;">
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
                     المحرك الاجتماعي الاحترافي لعملة $SINU وتطبيقات الـ Web3 المتقدمة 🌐
                 </p>
             </div>
 
-            <!-- تأكد أن كود الحقول النموذجية (Form Inputs) يبدأ مباشرة بعد هذا السطر دون أقواس قديمة -->
-
-            <!-- هنا يكمل باقي كود حقول الإدخال (البريد، كلمة المرور...) -->
-
-            
+            <!-- أزرار التبديل بين الدخول والتسجيل -->
             <div style="display: flex; gap: 10px; background: var(--bg-input); padding: 5px; border-radius: 16px;">
                 <button onclick="toggleAuthPanelMode('login')" style="flex:1; padding:12px; background:var(--dating-pink); border:none; color:#fff; border-radius:12px; cursor:pointer; font-weight:bold; transition: var(--transition-smooth);" id="btnModeLogin">تسجيل الدخول</button>
                 <button onclick="toggleAuthPanelMode('register')" style="flex:1; padding:12px; background:transparent; border:none; color:var(--text-main); cursor:pointer; font-weight:bold; transition: var(--transition-smooth);" id="btnModeRegister">إنشاء حساب جديد</button>
             </div>
 
+            <!-- حقول الإدخال الأساسية -->
             <input type="email" id="inputAuthEmail" placeholder="البريد الإلكتروني المعتمد">
             <input type="password" id="inputAuthPassword" placeholder="رمز المرور الآمن (6 خانات فأكثر)">
             
+            <!-- حقول التسجيل الإضافية -->
             <div id="wrapperFieldUsername" style="display: none; flex-direction: column; gap: 15px;">
                 <input type="text" id="inputAuthUsername" placeholder="اسم المستخدم الفريد (بالأحرف الصغيرة)">
                 <textarea id="inputAuthBio" placeholder="اكتب نبذتك التعريفية في مجتمع SINU..." rows="2" style="resize: none;"></textarea>
@@ -80,8 +67,10 @@
         </div>
     </div>
 
+    <!-- لوحة التحكم الرئيسية للتطبيق (تظهر بعد الدخول بنجاح) -->
     <div class="app-main-dashboard" id="coreAppMainDashboard" style="display: none;">
         
+        <!-- القسم 1: الحساب والمحفظة -->
         <div class="zone-sidebar-panel">
             <div class="zone-header-title">
                 <div><i class="fa-solid fa-id-card"></i> 1. الحساب والمحفظة</div>
@@ -133,6 +122,7 @@
             </div>
         </div>
 
+        <!-- القسم 2: رادار الأعضاء حياً -->
         <div class="zone-sidebar-panel">
             <div class="zone-header-title">
                 <div><i class="fa-solid fa-satellite-dish"></i> 2. رادار الأعضاء حياً</div>
@@ -141,6 +131,7 @@
             <div class="zone-content-scrollable" id="uiActiveOnlineUsersContainer"></div>
         </div>
 
+        <!-- القسم 3: ساحة خلاصة المجتمع العام -->
         <div class="main-feed-center">
             <div class="zone-header-title">
                 <div><i class="fa-solid fa-globe"></i> 3. ساحة خلاصة المجتمع العام (Global Feed)</div>
@@ -166,13 +157,13 @@
             <div class="zone-content-scrollable" id="uiMainMessagesContainer"></div>
         </div>
 
+        <!-- القسم 4: شات الفيديو والمراسلة الآمنة -->
         <div class="zone-sidebar-panel zone-chat-and-camera">
             <div class="zone-header-title">
                 <div><i class="fa-solid fa-comments"></i> 4. شات الفيديو والمراسلة الآمنة</div>
             </div>
             
             <div style="padding: 18px; display: flex; flex-direction: column; gap: 14px; flex: 1; overflow: hidden;">
-                
                 <div class="camera-hardware-integrator">
                     <div id="cameraFallbackText" style="position: absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#a29498; font-size:0.85rem; text-align:center; padding:20px; background: rgba(20,13,15,0.95);">
                         <i class="fa-solid fa-video-slash" style="font-size:2.2rem; margin-bottom:10px; color: var(--dating-pink);"></i>
@@ -215,11 +206,11 @@
                     <input type="text" id="inputPrivateMessageTextField" placeholder="اكتب رسالة خاصة مشفرة..." style="flex:1; padding:12px 16px; font-size:0.88rem; border-radius:14px;">
                     <button class="btn-tactical-action" onclick="submitPrivateChatMessageFromZone()" style="padding:12px 18px; border-radius:14px;"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
-
             </div>
         </div>
     </div>
 
+    <!-- المودال الخاص بعرض حساب المستخدم -->
     <div class="core-modal-backdrop" id="userProfileViewModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); backdrop-filter:blur(15px); z-index:999999; align-items:center; justify-content:center;">
         <div class="auth-panel-card" style="max-width: 430px; text-align: center; gap: 16px;">
             <img id="modalUserAvatar" src="" style="width: 90px; height: 90px; border-radius: 50%; margin: 0 auto; object-fit: cover; border: 3px solid var(--dating-pink);">
