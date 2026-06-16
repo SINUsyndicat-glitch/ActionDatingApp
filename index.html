@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINU Command Center - Extreme 4-Zone Web3 Engine</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="live-screen-overlay-container" id="globalLiveScreenOverlay"></div>
+
+    <div class="auth-backdrop" id="coreAuthBackdrop">
+        <div class="auth-panel-card">
+          </head>
+<body>
+
+    <div class="live-screen-overlay-container" id="globalLiveScreenOverlay"></div>
+
+    <div class="auth-backdrop" id="coreAuthBackdrop">
+        <div class="auth-panel-card">
+            
+            <!-- الهيدر الاحترافي الجديد مع اللوغو الرسمي الخاص بك -->
+            <div style="text-align: center; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 10px;">
+                    <img src="1781612384197.png" alt="SINU Site Logo" style="width: 55px; height: 55px; border-radius: 12px; object-fit: cover; box-shadow: 0 4px 15px rgba(255, 101, 132, 0.4); border: 1px solid rgba(255, 101, 132, 0.2);">
+                    <h2 style="color: var(--dating-pink); font-size: 2.3rem; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px;">
+                        SINU <span style="color: var(--danger);">❤️</span>
+                    </h2>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
+                    المحرك الاجتماعي الاحترافي لعملة $SINU وتطبيقات الـ Web3 المتقدمة 🌐
+                </p>
+            </div>
+
+            <!-- هنا يكمل باقي كود حقول الإدخال (البريد، كلمة المرور...) -->
+
+            
+            <div style="display: flex; gap: 10px; background: var(--bg-input); padding: 5px; border-radius: 16px;">
+                <button onclick="toggleAuthPanelMode('login')" style="flex:1; padding:12px; background:var(--dating-pink); border:none; color:#fff; border-radius:12px; cursor:pointer; font-weight:bold; transition: var(--transition-smooth);" id="btnModeLogin">تسجيل الدخول</button>
+                <button onclick="toggleAuthPanelMode('register')" style="flex:1; padding:12px; background:transparent; border:none; color:var(--text-main); cursor:pointer; font-weight:bold; transition: var(--transition-smooth);" id="btnModeRegister">إنشاء حساب جديد</button>
+            </div>
+
+            <input type="email" id="inputAuthEmail" placeholder="البريد الإلكتروني المعتمد">
+            <input type="password" id="inputAuthPassword" placeholder="رمز المرور الآمن (6 خانات فأكثر)">
+            
+            <div id="wrapperFieldUsername" style="display: none; flex-direction: column; gap: 15px;">
+                <input type="text" id="inputAuthUsername" placeholder="اسم المستخدم الفريد (بالأحرف الصغيرة)">
+                <textarea id="inputAuthBio" placeholder="اكتب نبذتك التعريفية في مجتمع SINU..." rows="2" style="resize: none;"></textarea>
+                
+                <div style="display: flex; align-items: center; gap: 15px; background: var(--bg-input); padding: 14px; border-radius: 16px; border: 1px solid var(--border-color);">
+                    <div id="previewUploaderAvatarContainer" style="width: 55px; height: 55px; border-radius: 50%; background: #e8e0e2; border: 2px dashed var(--dating-pink); display: flex; align-items: center; justify-content: center; overflow: hidden;">👤</div>
+                    <label style="background: var(--dating-purple); color: #fff; padding: 10px 16px; border-radius: 12px; font-size: 0.82rem; cursor: pointer; font-weight: bold;">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> رفع الصورة الشخصية
+                        <input type="file" id="inputAvatarFile" accept="image/*" onchange="processSelectedAvatarImage(this)" style="display: none;">
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn-tactical-action" id="btnAuthActionExecute" onclick="executeCoreAuthenticationAction()">تأكيد الهوية وتوصيل العقد 🔑</button>
+        </div>
+    </div>
+
+    <div class="app-main-dashboard" id="coreAppMainDashboard" style="display: none;">
+        
+        <div class="zone-sidebar-panel">
+            <div class="zone-header-title">
+                <div><i class="fa-solid fa-id-card"></i> 1. الحساب والمحفظة</div>
+            </div>
+            <div class="zone-content-scrollable">
+                <div class="profile-card-container">
+                    <div class="profile-avatar-wrapper">
+                        <img id="uiSidebarAvatarImage" src="" alt="Avatar">
+                    </div>
+                    <h3 id="uiSidebarProfileUsername" style="font-weight: 800;">@username</h3>
+                    <p id="uiSidebarProfileBioText" style="color: var(--text-muted); font-size: 0.82rem; line-height: 1.5;"></p>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #fff, rgba(255,101,132,0.03)); padding: 20px; border-radius: 20px; border: 1px solid var(--border-color); text-align: center;">
+                    <span style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 6px;"><i class="fa-solid fa-wallet"></i> رصيد المنصة الحجمي ($SINU)</span>
+                    <strong id="uiBalanceCounterLabel" style="font-size: 1.9rem; color: var(--dating-pink); font-weight: 900;">0.00</strong>
+                    
+                    <div style="margin-top: 8px; font-size: 0.72rem; color: var(--text-muted); display: flex; flex-direction:column; gap:2px; border-top:1px dashed #ffd5dd; padding-top:6px;">
+                        <span>رصيد المحفظة: <strong id="onchainWalletBalanceLabel">0.00</strong> SINU</span>
+                        <span>الرصيد المودع بالعقد: <strong id="onchainContractInAppBalanceLabel">0.00</strong> SINU</span>
+                    </div>
+                </div>
+
+                <div style="background:#fff; border:1px solid var(--border-color); padding:16px; border-radius:18px; display:flex; flex-direction:column; gap:10px;">
+                    <span style="font-size:0.78rem; font-weight:bold; color:var(--dating-purple);"><i class="fa-solid fa-square-plus"></i> بوابة شحن رصيد العقد الآمنة</span>
+                    <input type="number" id="inputDepositAmountWeiField" placeholder="الكمية المراد شحنها (مثال: 500)" style="padding:10px; font-size:0.85rem; border-radius:12px;">
+                    <button class="btn-tactical-action" onclick="executeWeb3DepositSinuToContract()" style="padding:11px; font-size:0.8rem; border-radius:12px; background:var(--dating-purple);"><i class="fa-solid fa-gas-pump"></i> إيداع وتعبئة الرصيد سحابياً</button>
+                </div>
+
+                <div>
+                    <span style="font-size: 0.82rem; font-weight: bold; color: var(--text-muted); display: block; margin-bottom: 8px;"><i class="fa-solid fa-shield"></i> الأوسمة ونظام التقييم الرقمي</span>
+                    <div class="badges-grid-system" id="uiBadgesGridSystemContainer"></div>
+                </div>
+
+                <div style="background: #fff; padding: 18px; border-radius: 18px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px;">
+                    <span style="font-size: 0.85rem; font-weight: bold;"><i class="fa-solid fa-sliders"></i> معايير الخصوصية</span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem;">
+                        <span>تشفير الجلسة المتقدم</span>
+                        <input type="checkbox" id="setting2FA" checked style="width: 16px; height: 16px; accent-color: var(--dating-pink);">
+                    </div>
+                </div>
+
+                <button class="btn-tactical-action" style="background: #1c1315;" id="btnWeb3ConnectionMaster" onclick="connectWeb3WalletBridge()">
+                    <i class="fa-brands fa-ethereum"></i> <span id="uiConnectedWalletAddressTag">ربط محفظة ويب 3 ذكية 🔌</span>
+                </button>
+                <button class="btn-tactical-action" style="background: #611824;" onclick="coreAuthInstance.signOut()">
+                    <i class="fa-solid fa-power-off"></i> قطع الاتصال الآمن
+                </button>
+            </div>
+        </div>
+
+        <div class="zone-sidebar-panel">
+            <div class="zone-header-title">
+                <div><i class="fa-solid fa-satellite-dish"></i> 2. رادار الأعضاء حياً</div>
+                <span style="background: var(--success); color: #fff; font-size: 0.7rem; padding: 4px 10px; border-radius: 10px; font-weight: bold;" id="radarOnlineCounter">0 نشط</span>
+            </div>
+            <div class="zone-content-scrollable" id="uiActiveOnlineUsersContainer"></div>
+        </div>
+
+        <div class="main-feed-center">
+            <div class="zone-header-title">
+                <div><i class="fa-solid fa-globe"></i> 3. ساحة خلاصة المجتمع العام (Global Feed)</div>
+            </div>
+            
+            <div class="creation-toolbar-card">
+                <textarea id="inputMainPrimaryTextField" placeholder="اكتب تفاصيل أو منشور جديد لعملة $SINU أو أرفق وسائط رقمية..." rows="2" style="resize: none;"></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 8px;">
+                        <label style="background: var(--bg-hover); padding: 11px 16px; border-radius: 14px; font-size: 0.85rem; cursor: pointer; border: 1px solid var(--border-color); display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-image" style="color: var(--dating-pink);"></i> صورة
+                            <input type="file" id="postImageInput" accept="image/*" onchange="processMediaAttachment('image')" style="display: none;">
+                        </label>
+                        <label style="background: var(--bg-hover); padding: 11px 16px; border-radius: 14px; font-size: 0.85rem; cursor: pointer; border: 1px solid var(--border-color); display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-video" style="color: var(--dating-purple);"></i> فيديو
+                            <input type="file" id="postVideoInput" accept="video/*" onchange="processMediaAttachment('video')" style="display: none;">
+                        </label>
+                    </div>
+                    <button class="btn-tactical-action" onclick="submitActiveMessageFromToolbar()" style="padding: 12px 26px; border-radius: 14px;"><i class="fa-solid fa-paper-plane"></i> بث المنشور</button>
+                </div>
+            </div>
+
+            <div class="zone-content-scrollable" id="uiMainMessagesContainer"></div>
+        </div>
+
+        <div class="zone-sidebar-panel zone-chat-and-camera">
+            <div class="zone-header-title">
+                <div><i class="fa-solid fa-comments"></i> 4. شات الفيديو والمراسلة الآمنة</div>
+            </div>
+            
+            <div style="padding: 18px; display: flex; flex-direction: column; gap: 14px; flex: 1; overflow: hidden;">
+                
+                <div class="camera-hardware-integrator">
+                    <div id="cameraFallbackText" style="position: absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#a29498; font-size:0.85rem; text-align:center; padding:20px; background: rgba(20,13,15,0.95);">
+                        <i class="fa-solid fa-video-slash" style="font-size:2.2rem; margin-bottom:10px; color: var(--dating-pink);"></i>
+                        الكاميرا مغلقة أو بانتظار تفعيل العقد الآمن (HTTPS)
+                    </div>
+                    <video id="hardwareLocalWebcamVideo" autoplay playsinline muted></video>
+                    
+                    <div class="camera-controls-overlay">
+                        <button class="btn-circle-media" id="btnToggleCameraDevice" onclick="toggleLocalWebcamHardwareState()" title="تفعيل/تعطيل الكاميرا">
+                            <i class="fa-solid fa-video"></i>
+                        </button>
+                        <button class="btn-circle-media" id="btnToggleAudioDevice" onclick="toggleLocalMicrophoneHardwareState()" title="كتم/تفعيل المايك">
+                            <i class="fa-solid fa-microphone"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div style="background: rgba(174, 82, 255, 0.04); border: 1px dashed var(--dating-purple); border-radius: 14px; padding: 12px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem;">
+                    <span><i class="fa-solid fa-user-shield"></i> التدمير الذاتي للرسائل:</span>
+                    <select id="uiSelfDestructTimerSelection" style="padding: 5px 10px; font-size: 0.78rem; border-radius: 10px;">
+                        <option value="0">تعطيل التدمير</option>
+                        <option value="10">بعد 10 ثوانٍ</option>
+                        <option value="60">بعد دقيقة واحدة</option>
+                    </select>
+                </div>
+
+                <div class="luxury-gift-shop-wrapper" id="uiDatingGiftsPanelWrapper">
+                    <span style="font-size: 0.8rem; font-weight: 700; display: block; margin-bottom: 8px;"><i class="fa-solid fa-gift" style="color: var(--dating-pink);"></i> متجر الهدايا التفاعلية (انقر للإرسال الفوري)</span>
+                    <div class="gifts-matrix-grid" id="uiGiftsMatrixGridContainer"></div>
+                </div>
+
+                <div id="privateChatHeader" style="font-size:0.85rem; font-weight:bold; color:var(--dating-purple); padding-bottom: 6px; border-bottom:1px solid var(--border-color);">
+                    <i class="fa-solid fa-network-wired"></i> القناة الحالية: <span id="currentChatPartnerNameText">اختر عضواً</span>
+                </div>
+                <div id="privateChatMessagesScrollBox" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:12px; background:rgba(255,255,255,0.5); border-radius:16px; padding:12px; border:1px solid var(--border-color);">
+                    <div style="text-align:center; color:var(--text-muted); font-size:0.8rem; padding:40px 10px;">اضغط على أي مستخدم في "رادار المتصلين حياً" بالقسم الثاني لتفعيل المراسلة الآمنة وتبادل الهدايا معه هنا.</div>
+                </div>
+
+                <div style="display:flex; gap:8px;">
+                    <input type="text" id="inputPrivateMessageTextField" placeholder="اكتب رسالة خاصة مشفرة..." style="flex:1; padding:12px 16px; font-size:0.88rem; border-radius:14px;">
+                    <button class="btn-tactical-action" onclick="submitPrivateChatMessageFromZone()" style="padding:12px 18px; border-radius:14px;"><i class="fa-solid fa-paper-plane"></i></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="core-modal-backdrop" id="userProfileViewModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); backdrop-filter:blur(15px); z-index:999999; align-items:center; justify-content:center;">
+        <div class="auth-panel-card" style="max-width: 430px; text-align: center; gap: 16px;">
+            <img id="modalUserAvatar" src="" style="width: 90px; height: 90px; border-radius: 50%; margin: 0 auto; object-fit: cover; border: 3px solid var(--dating-pink);">
+            <h3 id="modalUsername" style="color: var(--text-main); font-weight: 800;">@username</h3>
+            <p id="modalUserBio" style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;"></p>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 5px;">
+                <button class="btn-tactical-action" onclick="executeSinuDirectTip()"><i class="fa-solid fa-hand-holding-dollar"></i> تقديم دعم مجتمعي فوري بقيمة 100 SINU 🪙</button>
+                <button class="btn-tactical-action" style="background: var(--bg-input); color:#333; box-shadow: none;" onclick="closeUserProfileModal()">إغلاق الشاشة</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
