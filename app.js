@@ -564,3 +564,45 @@ async function executeWeb3DepositSinuToContract() {
         alert('فشلت معاملة البلوكشين: ' + err.message);
     }
 }
+// دالة التبديل بين الأقسام الأربعة على الهاتف حياً
+function switchZoneMobileView(zoneIndex) {
+    // 1. جلب كافة الأقسام (المحفظة، الرادار، الساحة، الشات)
+    const panels = document.querySelectorAll('.app-main-dashboard > div');
+    
+    if (panels.length >= 4) {
+        // إخفاء جميع الأقسام أولاً
+        panels.forEach(p => p.style.display = 'none');
+        // إظهار القسم الذي قمت بالضغط عليه فقط
+        panels[zoneIndex].style.display = 'flex';
+    }
+
+    // 2. تحديث مظهر الأزرار النشطة في الشريط السفلي
+    const navItems = document.querySelectorAll('.mobile-bottom-nav .nav-item');
+    navItems.forEach(item => item.classList.remove('active'));
+    navItems[zoneIndex].classList.add('active');
+}
+
+// تعديل على نظام الفايربيس لإظهار الشريط تلقائياً بعد الدخول الناجح
+coreAuthInstance.onAuthStateChanged((user) => {
+    if (user) {
+        // إذا سجل الدخول بنجاح، أظهر لوحة التحكم والشريط السفلي فوراً
+        document.getElementById('coreAuthBackdrop').style.display = 'none';
+        document.getElementById('coreAppMainDashboard').style.display = 'flex';
+        document.getElementById('uiMobileBottomNav').style.display = 'flex'; // إظهار الشريط
+        
+        // تفعيل القسم الأول تلقائياً عند الدخول
+        if (window.innerWidth <= 900) {
+            switchZoneMobileView(0);
+        }
+        
+        loadMyCachedProfileDataFromServer(user.uid);
+        listenToActiveOnlineUsersRadar();
+        listenToGlobalCommunityFeedMessages();
+    } else {
+        // إذا خرج، أخفِ اللوحة والشريط وأظهر بوابة الدخول
+        document.getElementById('coreAuthBackdrop').style.display = 'flex';
+        document.getElementById('coreAppMainDashboard').style.display = 'none';
+        document.getElementById('uiMobileBottomNav').style.display = 'none'; // إخفاء الشريط
+    }
+});
+
